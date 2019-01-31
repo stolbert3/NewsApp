@@ -5,19 +5,16 @@ var Schema = mongoose.Schema;
 var ArticleSchema = new Schema({
   headline: {
     type: String,
-    required: true
+    required: true,
+    unique: { index: { unique: true } }
   },
   summary: {
     type: String,
     required: true
   },
-  URL: {
+  url: {
     type: String,
     required: true
-  },
-  comments: {
-    type: Schema.Types.ObjectId,
-    ref: "Comments"
   }
 });
 
