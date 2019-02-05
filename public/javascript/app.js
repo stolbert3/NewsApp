@@ -1,13 +1,12 @@
-$(document).ready(function() {
-
-  $("#scrapeBtn").on("click", function() {
-    $.ajax({
-      method: "GET",
-      url: "/scrape"
-    }).done(function(data) {
-      console.log(data)
+$("#scrapeBtn").on("click", function() {
+  $.ajax({
+    type: "GET",
+    url: "/scrape",
+    data: "",
+    success: function(data) {
+      console.log(data);
       window.location = "/"
-    })
+    }
   });
-
-})
+  console.log("clicked");
+});
