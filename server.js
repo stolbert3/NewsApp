@@ -38,6 +38,7 @@ app.use(bodyParser.json());
 app.use(routes);
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsappDB";
+console.log(MONGODB_URI);
 
 mongoose.connect(MONGODB_URI);
 
