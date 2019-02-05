@@ -11,21 +11,18 @@ var scrape = function() {
       var result = {};
 
       result.headline = $(this).find("title").text().trim();
-      console.log("Head: " + result.headline);
+      //console.log("Head: " + result.headline);
 
       result.summary = $(this).find("description").text().trim();
-      console.log("Summ: " + result.summary);
+      //console.log("Summ: " + result.summary);
 
       result.url = $(this).find("guid").text();
-      console.log("Url: " + result.url);
+      //console.log("Url: " + result.url);
 
       articles.push(result)
-      console.log(result);
     });
     return articles;
   });
 };
-
-console.log("Scrape output: " + scrape());
 
 module.exports = scrape;
