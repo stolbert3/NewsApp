@@ -6,34 +6,26 @@ var scrape = function() {
     var $ = cheerio.load(res.data);
     var articles = [];
 
-    $("channel.item").each(function(i, element) {
+    $("channel item").each(function(i, element) {
 
-      var head = $(this)
-        .find("title")
-        .text()
-        .trim();
+      var result = {};
 
-      var summ = $(this)
-      .find("description")
-      .text()
-      .trim();
+      result.head = $(this).find("title").text().trim();
+      console.log("Head: " + result.head);
 
-      var url = $(this)
-        .find("link")
-        .attr("href");
+      result.summ = $(this).find("description").text().trim();
+      console.log("Summ: " + result.summ);
 
-      if (head && summ && url) {
-        var dataToAdd = {
-          headline: head,
-          summary: summ,
-          url: url
-        };
+      result.url = $(this).find("link").attr("href");
+      console.log("Url: " + result.url);
 
-        articles.push(dataToAdd);
-      }
+      articles.push(result)
+      console.log(result);
     });
     return articles;
   });
 };
+
+console.log("Scrape output: " + scrape());
 
 module.exports = scrape;
