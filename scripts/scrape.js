@@ -10,13 +10,13 @@ var scrape = function() {
 
       var result = {};
 
-      result.head = $(this).find("title").text().trim();
-      console.log("Head: " + result.head);
+      result.headline = $(this).find("title").text().trim();
+      console.log("Head: " + result.headline);
 
-      result.summ = $(this).find("description").text().trim();
-      console.log("Summ: " + result.summ);
+      result.summary = $(this).find("description").text().trim();
+      console.log("Summ: " + result.summary);
 
-      result.url = $(this).find("link").attr("href");
+      result.url = $(this).find("guid").text();
       console.log("Url: " + result.url);
 
       articles.push(result)
