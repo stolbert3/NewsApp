@@ -7,10 +7,6 @@ var CommentsSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Article"
   },
-  user: {
-    type: String,
-    required: true
-  },
   body: {
     type: String,
     required: true

@@ -8,5 +8,17 @@ $("#scrapeBtn").on("click", function() {
       window.location = "/"
     }
   });
-  console.log("clicked");
+});
+
+$(".save").on("click", function() {
+  var thisId = $(this).attr("data-id");
+  $.ajax({
+      type: "POST",
+      url: "/articles/save/" + thisId,
+      data: "",
+      success: function(data) {
+        console.log(data);
+        window.location = "/"
+      }
+  });
 });

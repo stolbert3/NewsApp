@@ -66,3 +66,24 @@ app.get("/scrape", function (req,res) {
     res.send("Scrape Complete");
   });
 })
+
+app.get("/saved", function(req, res) {
+  Article.find({"saved": true}).populate("comments").exec(function(error, articles) {
+    var hbsObject = {
+      article: articles
+    };
+    res.render("saved", hbsObject);
+  });
+});
+
+app.post("/articles/save/:id", function(req, res) {
+  Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true})
+  .exec(function(err, doc) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
