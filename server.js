@@ -31,6 +31,7 @@ app.listen(PORT, function() {
 
 //Routes
 
+//Get all articles
 app.get("/", function(req, res) {
   Article.find({}, function(error, data) {
     var hbsObject = {
@@ -41,6 +42,7 @@ app.get("/", function(req, res) {
   });
 });
 
+//Scrape articles
 app.get("/scrape", function (req,res) {
   axios.get("https://www.huffingtonpost.com/section/front-page/feed").then(function(res) {
     var $ = cheerio.load(res.data);
@@ -67,6 +69,7 @@ app.get("/scrape", function (req,res) {
   });
 })
 
+//Get all saved articles
 app.get("/saved", function(req, res) {
   Article.find({"saved": true}).populate("comments").exec(function(error, articles) {
     var hbsObject = {
@@ -76,8 +79,22 @@ app.get("/saved", function(req, res) {
   });
 });
 
+//Save a new article
 app.post("/articles/save/:id", function(req, res) {
-  Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true})
+  Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true })
+  .exec(function(err, doc) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+//Delete an article
+app.post("/articles/delete/:id", function(req, res) {
+  Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": false })
   .exec(function(err, doc) {
     if (err) {
       console.log(err);

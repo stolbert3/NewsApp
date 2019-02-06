@@ -10,11 +10,24 @@ $("#scrapeBtn").on("click", function() {
   });
 });
 
-$(".save").on("click", function() {
+$(".saveBtn").on("click", function() {
   var thisId = $(this).attr("data-id");
   $.ajax({
       type: "POST",
       url: "/articles/save/" + thisId,
+      data: "",
+      success: function(data) {
+        console.log(data);
+        window.location = "/"
+      }
+  });
+});
+
+$(".deleteBtn").on("click", function() {
+  var thisId = $(this).attr("data-id");
+  $.ajax({
+      type: "POST",
+      url: "/articles/delete/" + thisId,
       data: "",
       success: function(data) {
         console.log(data);
